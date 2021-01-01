@@ -77,11 +77,13 @@ int main(int argc, const char **argv)
                 }
 
                 if (bind(fd, addr->ai_addr, addr->ai_addrlen) < 0) {
-                        puts("Failed to bind - skipping");
+                        puts("Failed to bind fd");
 
                         close(fd);
 
-                        continue;
+                        freeaddrinfo(addrs);
+
+                        return EXIT_FAILURE;
                 }
 
                 if (listen(fd, MAX_BACKLOG) != 0) {
