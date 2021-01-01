@@ -120,7 +120,7 @@ int main(int argc, const char **argv)
         }
 
         // Add fd to epoll
-        struct epoll_event ev;
+        struct epoll_event ev = {};
 
         ev.events = EPOLLIN;
         ev.data.fd = fd;
@@ -147,6 +147,8 @@ int main(int argc, const char **argv)
                         if (events[i].data.fd == fd) {
                                 printf("Got %d ready fds", ready_fds);
                         }
+
+                        return EXIT_SUCCESS;
                 }
         }
 
